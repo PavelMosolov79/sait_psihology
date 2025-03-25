@@ -327,7 +327,7 @@ function App() {
                       <tr>
                         <th>Раунд</th>
                         <th>Ваш ход</th>
-                        <th>Ход компьютера</th>
+                        <th>Ход противника</th>
                       </tr>
                     </thead>
                     <tbody id="movesHistory" ref={refItem}>
