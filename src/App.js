@@ -175,6 +175,21 @@ function App() {
   };
   const [animationStepTwo, setAnimationStepTwo] = useState('initial');
 
+  const shangeImg = React.useCallback(() => { // Оберните в useCallback
+    if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
+      setDefaultImageComp(DefaultBoyWin);
+      setDefaultImageUser(DefaultBoySad);
+    } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
+      setDefaultImageComp(DefaultBoySad);
+      setDefaultImageUser(DefaultBoySad);
+    } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
+      setDefaultImageComp(DefaultBoyWin);
+      setDefaultImageUser(DefaultBoyWin);
+    } else if (lastMove === "Пропустить ход") {
+      setDefaultImageComp(DefaultBoy);
+      setDefaultImageUser(DefaultBoy);
+    }
+  }, [lastMove, lastCompMove, setDefaultImageComp, setDefaultImageUser]);
 
 
   useEffect(() => {
@@ -213,27 +228,8 @@ function App() {
         clearTimeout(timer1)
       }
     }
-  }, [isAnimating]);
+  }, [isAnimating, shangeImg]);
 
-  const shangeImg = () => {
-    console.log(lastMove, lastCompMove)
-    if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
-      setDefaultImageComp(DefaultBoyWin)
-      setDefaultImageUser(DefaultBoySad)
-    }  else if (lastMove === "Обмануть" && lastCompMove === "Довериться") {
-      setDefaultImageComp(DefaultBoySad)
-      setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
-      setDefaultImageComp(DefaultBoySad)
-      setDefaultImageUser(DefaultBoySad)
-    } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
-      setDefaultImageComp(DefaultBoyWin)
-      setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove === "Пропустить ход" || lastCompMove === "Пропустить ход") {
-      setDefaultImageComp(DefaultBoy)
-      setDefaultImageUser(DefaultBoy)
-    }
-  }
 
   if (firstStart) {
     return (
@@ -300,13 +296,13 @@ function App() {
                       initial={0}
                       animate={animationStep}
                     >
-                      <img src={defaultImageUser}/>
+                      <img src={defaultImageUser} alt=""/>
                     </motion.div>
                     {/* <div className='animations-blocks-one-man'>
                       <img src={DefaultBoy}/>
                     </div> */}
                     <div className='animations-blocks-stone'>
-                      <img src={Stone}/>
+                      <img src={Stone} alt=""/>
                     </div>
                     <motion.div
                       style={{
@@ -317,7 +313,7 @@ function App() {
                       initial={0}
                       animate={animationStepTwo}
                     >
-                      <img src={defaultImageComp}/>
+                      <img src={defaultImageComp} alt=""/>
                     </motion.div>
                   </div>
                   <div id="result">Раунд: {round} / 30<br/>Ваши баллы: {scoreUser} | Баллы противника: {scoreComp}</div>
