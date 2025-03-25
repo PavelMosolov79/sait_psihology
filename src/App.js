@@ -45,36 +45,36 @@ function App() {
   }
 
   const chekScored = (user, comp) => {
-    if (user == "Довериться") {
-      if (user == comp) {
+    if (user === "Довериться") {
+      if (user === comp) {
           setScoreUser(prevValue => prevValue + 5)
           setScoreComp(prevValue => prevValue + 5)
-      } else if (comp == "Пропустить ход") {
+      } else if (comp === "Пропустить ход") {
         setScoreUser(prevValue => prevValue)
         setScoreComp(prevValue => prevValue)
-      } else if (comp == "Обмануть") {
+      } else if (comp === "Обмануть") {
         setScoreUser(prevValue => prevValue - 2)
         setScoreComp(prevValue => prevValue + 5)
       }
-    } else if (user == "Пропустить ход") {
-      if (user == comp) {
+    } else if (user === "Пропустить ход") {
+      if (user === comp) {
           setScoreUser(prevValue => prevValue)
           setScoreComp(prevValue => prevValue)
-      } else if (comp == "Довериться") {
+      } else if (comp === "Довериться") {
         setScoreUser(prevValue => prevValue)
         setScoreComp(prevValue => prevValue)
-      } else if (comp == "Обмануть") {
+      } else if (comp === "Обмануть") {
         setScoreUser(prevValue => prevValue)
         setScoreComp(prevValue => prevValue)
       }
-    } else if (user == "Обмануть") {
-      if (user == comp) {
+    } else if (user === "Обмануть") {
+      if (user === comp) {
         setScoreUser(prevValue => prevValue - 1)
         setScoreComp(prevValue => prevValue - 1)
-      } else if (comp == "Пропустить ход") {
+      } else if (comp === "Пропустить ход") {
         setScoreUser(prevValue => prevValue)
         setScoreComp(prevValue => prevValue)
-      } else if (comp == "Довериться") {
+      } else if (comp === "Довериться") {
         setScoreUser(prevValue => prevValue + 5)
         setScoreComp(prevValue => prevValue - 2)
       }
@@ -102,16 +102,16 @@ function App() {
         // Здесь нужно получить предыдущий ход игрока из таблицы
         // (реализация зависит от того, как вы храните историю ходов)
         //  Пока просто ставим случайный ход, чтобы не было ошибки
-        computerMove = lastMove == "Довериться" ? "Обмануть" : lastMove == "Пропустить ход" ? "Обмануть" : "Обмануть";
+        computerMove = lastMove === "Довериться" ? "Обмануть" : lastMove === "Пропустить ход" ? "Обмануть" : "Обмануть";
         chekScored(yourMove, computerMove);
       }
     } else if (selectMode === 3) {
       // Выигрыш всегда (всегда обманывает)
-      computerMove = yourMove == "Довериться" ? "Довериться" : lastMove == "Пропустить ход" ? "Довериться" : "Довериться";
+      computerMove = yourMove === "Довериться" ? "Довериться" : lastMove === "Пропустить ход" ? "Довериться" : "Довериться";
       chekScored(yourMove, computerMove);
     } else if (selectMode === 4) {
       // Проигрыш всегда (всегда сотрудничает)
-      computerMove = lastMove == "Довериться" ? "Обмануть" : lastMove == "Пропустить ход" ? "Обмануть" : "Обмануть";
+      computerMove = lastMove === "Довериться" ? "Обмануть" : lastMove === "Пропустить ход" ? "Обмануть" : "Обмануть";
       chekScored(yourMove, computerMove);
     }
 
@@ -179,19 +179,19 @@ function App() {
 
   const shangeImg = () => {
     console.log(lastMove, lastCompMove)
-    if (lastMove == "Довериться" && lastCompMove == "Обмануть") {
+    if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
       setDefaultImageComp(DefaultBoyWin)
       setDefaultImageUser(DefaultBoySad)
-    }  else if (lastMove == "Обмануть" && lastCompMove == "Довериться") {
+    }  else if (lastMove === "Обмануть" && lastCompMove === "Довериться") {
       setDefaultImageComp(DefaultBoySad)
       setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove == "Обмануть" && lastCompMove == "Обмануть") {
+    } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
       setDefaultImageComp(DefaultBoySad)
       setDefaultImageUser(DefaultBoySad)
-    } else if (lastMove == "Довериться" && lastCompMove == "Довериться") {
+    } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
       setDefaultImageComp(DefaultBoyWin)
       setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove == "Пропустить ход" || lastCompMove == "Пропустить ход") {
+    } else if (lastMove === "Пропустить ход" || lastCompMove === "Пропустить ход") {
       setDefaultImageComp(DefaultBoy)
       setDefaultImageUser(DefaultBoy)
     }
@@ -276,7 +276,7 @@ function App() {
             <div className="game-container">
               <h1>Дилемма узника</h1>
               <div style={{display: "flex", alignItems: "center", marginBottom: "5px"}}>
-                <p style={{width: "220px"}} id="mode">{selectMode == 0 ? "Выберите режим" : selectModeName}</p>
+                <p style={{width: "220px"}} id="mode">{selectMode === 0 ? "Выберите режим" : selectModeName}</p>
                 <button style={{margin: "0px"}} onClick={() => setOpenModal(prevValue => !prevValue)}>Выбрать режим</button>
               </div>
               <button style={{margin: "0px"}} onClick={openStartFunction}>Начать игру</button>
