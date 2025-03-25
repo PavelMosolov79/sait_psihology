@@ -86,7 +86,6 @@ function App() {
     let computerMove = "";
 
     setIsAnimating(true);
-    setIsAnimatingTwo(true);
 
     if (selectMode === 1) {
       // Случайный выбор
@@ -175,27 +174,8 @@ function App() {
     exit: { opacity: 0, x: -50, transition: { duration: 0.5 } }, // Скрытие справа
   };
   const [animationStepTwo, setAnimationStepTwo] = useState('initial');
-  const [isAnimatingTwo, setIsAnimatingTwo] = useState(false)
 
-  const shangeImg = () => {
-    console.log(lastMove, lastCompMove)
-    if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
-      setDefaultImageComp(DefaultBoyWin)
-      setDefaultImageUser(DefaultBoySad)
-    }  else if (lastMove === "Обмануть" && lastCompMove === "Довериться") {
-      setDefaultImageComp(DefaultBoySad)
-      setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
-      setDefaultImageComp(DefaultBoySad)
-      setDefaultImageUser(DefaultBoySad)
-    } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
-      setDefaultImageComp(DefaultBoyWin)
-      setDefaultImageUser(DefaultBoyWin)
-    } else if (lastMove === "Пропустить ход" || lastCompMove === "Пропустить ход") {
-      setDefaultImageComp(DefaultBoy)
-      setDefaultImageUser(DefaultBoy)
-    }
-  }
+
 
   useEffect(() => {
     if (isAnimating) {
@@ -222,11 +202,10 @@ function App() {
               setAnimationStep('initial');
               setAnimationStepTwo('initial');
               setIsAnimating(false); // Сбрасываем флаг
-              setIsAnimatingTwo(false);
             }, 700); // Время для ухода
             return () => clearTimeout(timer4);
           }, 500); // Время для возврата в исходный размер
-          return () => clearTimeout(timer2);
+          return () => clearTimeout(timer3);
         }, 500); // Время для увеличения
         return () => clearTimeout(timer2);
       }, 700); // Время появления
@@ -235,6 +214,26 @@ function App() {
       }
     }
   }, [isAnimating]);
+
+  const shangeImg = () => {
+    console.log(lastMove, lastCompMove)
+    if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
+      setDefaultImageComp(DefaultBoyWin)
+      setDefaultImageUser(DefaultBoySad)
+    }  else if (lastMove === "Обмануть" && lastCompMove === "Довериться") {
+      setDefaultImageComp(DefaultBoySad)
+      setDefaultImageUser(DefaultBoyWin)
+    } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
+      setDefaultImageComp(DefaultBoySad)
+      setDefaultImageUser(DefaultBoySad)
+    } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
+      setDefaultImageComp(DefaultBoyWin)
+      setDefaultImageUser(DefaultBoyWin)
+    } else if (lastMove === "Пропустить ход" || lastCompMove === "Пропустить ход") {
+      setDefaultImageComp(DefaultBoy)
+      setDefaultImageUser(DefaultBoy)
+    }
+  }
 
   if (firstStart) {
     return (
