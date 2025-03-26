@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import Stone from "./assets/stone.svg"
 
 function App() {
-  const [firstStart, setFirstStart] = useState(true);
+  const [firstStart, setFirstStart] = useState(false);
 
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
@@ -296,6 +296,10 @@ function App() {
                       initial={0}
                       animate={animationStep}
                     >
+                      
+                      <div className='eye-men-one-1'></div>
+                      <div className='eye-men-one-2'></div>
+                      <div className='mouse-men-one'></div>
                       <img src={defaultImageUser} alt=""/>
                     </motion.div>
                     {/* <div className='animations-blocks-one-man'>
@@ -313,6 +317,9 @@ function App() {
                       initial={0}
                       animate={animationStepTwo}
                     >
+                      <div className='eye-men-two-1'></div>
+                      <div className='eye-men-two-2'></div>
+                      <div className='mouse-men-two'></div>
                       <img src={defaultImageComp} alt=""/>
                     </motion.div>
                   </div>

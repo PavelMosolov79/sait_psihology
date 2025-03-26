@@ -134,19 +134,142 @@ body {
 }
 
 .animations-blocks-one-man {
-  width: 100px;
-  height: 140px;
+  width: 120px;
+  height: 160px;
   display: flex;
   align-items: end;
   justify-content: center;
 }
 
+.eye-men-one-1 {
+  position: absolute;
+  top: 42px;
+  left: 52px;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 1px solid black; */
+  animation: blink 5s infinite, lookAround 7s ease-in-out infinite;
+}
+
+.eye-men-one-2 {
+  position: absolute;
+  top: 42px;
+  left: 62px;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 0.1px solid black; */
+  animation: blink 5s infinite, lookAround 7s ease-in-out infinite;
+}
+
+.mouse-men-one {
+  position: absolute;
+  top: 46px;
+  left: 55px;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  /* border-radius: 30px; */
+  border-bottom: 2px solid white;
+  animation: mousAnim 3s infinite;
+}
+
+@keyframes blink {
+  0%, 90% { /* Глаз открыт (большую часть времени) */
+    height: 5px;
+  }
+  92%, 94% { /* Закрытие глаза (моргание) */
+    height: 2px; /* Сплющиваем глаз, имитируя закрытие */
+  }
+  96%, 100% { /* Глаз снова открыт */
+    height: 5px;
+  }
+}
+
+@keyframes mousAnim {
+  0% {
+    border-radius: 8px;
+  }
+  25% {
+    border-radius: 5px;
+  }
+  50% {
+    border-radius: 4px;
+  }
+  75% {
+    border-radius: 5px;
+  }
+  100% {
+    border-radius: 8px;
+  }
+}
+
+@keyframes lookAround {
+  0% {
+    transform: translateX(-2px); /* Смотрим влево */
+  }
+  25% {
+    transform: translateX(0); /* Центр */
+  }
+  50% {
+    transform: translateX(2px); /* Смотрим вправо */
+  }
+  75% {
+    transform: translateX(0); /* Центр */
+  }
+  100% {
+    transform: translateX(-2px); /* Центр */
+  }
+}
+
 .animations-blocks-two-man {
-  width: 100px;
-  height: 140px;
+  width: 120px;
+  height: 160px;
   display: flex;
   align-items: end;
   justify-content: center;
+}
+
+.eye-men-two-1 {
+  position: absolute;
+  z-index: 11;
+  top: 42px;
+  left: 52px;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 1px solid black; */
+  animation: blink 5s infinite, lookAround 7s ease-in-out infinite;
+}
+
+.eye-men-two-2 {
+  position: absolute;
+  z-index: 11;
+  top: 42px;
+  left: 62px;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 0.1px solid black; */
+  animation: blink 5s infinite, lookAround 7s ease-in-out infinite;
+}
+
+.mouse-men-two {
+  position: absolute;
+  z-index: 11;
+  top: 46px;
+  left: 55px;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  /* border-radius: 30px; */
+  border-bottom: 2px solid white;
+  animation: mousAnim 3s infinite;
 }
 
 .animations-blocks-stone {
@@ -158,8 +281,9 @@ body {
 }
 
 .animations-blocks-one-man img{
-  width: 80px;
-  height: 120px;
+  width: 100px;
+  height: 140px;
+  outline: 1px solid black;
 }
 
 .animations-blocks-stone img{
@@ -168,8 +292,8 @@ body {
 }
 
 .animations-blocks-two-man img{
-  width: 80px;
-  height: 120px;
+  width: 100px;
+  height: 140px;
   transform: scaleX(-1);
 }
 
