@@ -177,6 +177,19 @@ body {
   animation: mousAnim 3s infinite;
 }
 
+.mouse-men-sad {
+  position: absolute;
+  z-index: 11;
+  top: 54px;
+  left: 55px;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  /* border-radius: 30px; */
+  border-top: 2px solid white;
+  animation: mousAnim 3s infinite;
+}
+
 @keyframes blink {
   0%, 90% { /* Глаз открыт (большую часть времени) */
     height: 5px;
@@ -186,6 +199,31 @@ body {
   }
   96%, 100% { /* Глаз снова открыт */
     height: 5px;
+  }
+}
+
+@keyframes blink2 {
+  0% {
+    height: 5px;
+    background-color: white;
+  }
+  25% {
+    height: 15px;
+  }
+  50% {
+    height: 25px;
+    background-color: rgb(1, 228, 197);
+    transform: rotate(360deg);
+  }
+  75.9% {
+    height: 35px;
+  }
+  76% {
+    height: 5px;
+  }
+  100% {
+    height: 5px;
+    background-color: white;
   }
 }
 
@@ -259,6 +297,209 @@ body {
   animation: blink 5s infinite, lookAround 7s ease-in-out infinite;
 }
 
+.eye-men-sad-1 {
+  position: absolute;
+  z-index: 11;
+  top: 42px;
+  left: 52px;
+  width: 6px;
+  height: 53x;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 0.1px solid black; */
+  animation: blink 5s infinite
+}
+
+.eye-men-brow-1 {
+  position: absolute;
+  z-index: 12;
+  top: 38px;
+  left: 50px;
+  /* transform: rotate(30deg) !important; */
+  width: 10px;
+  height: 2px;
+  background-color: white;
+  animation: lookAround1 7s ease-in-out infinite;
+}
+
+.eye-men-brow-2 {
+  position: absolute;
+  z-index: 12;
+  top: 38px;
+  left: 61px;
+  width: 10px;
+  height: 2px;
+  /* transform:  !important; */
+  background-color: white;
+  animation: lookAround2 7s ease-in-out infinite;
+}
+
+@keyframes lookAround1 {
+  0% {
+    transform: translateX(-2px) rotate(30deg); /* Смотрим влево */
+  }
+  25% {
+    transform: translateX(0) rotate(30deg); /* Центр */
+  }
+  50% {
+    transform: translateX(2px) rotate(30deg); /* Смотрим вправо */
+  }
+  75% {
+    transform: translateX(0) rotate(30deg); /* Центр */
+  }
+  100% {
+    transform: translateX(-2px) rotate(30deg); /* Центр */
+  }
+}
+
+@keyframes lookAround2 {
+  0% {
+    transform: translateX(-2px) rotate(-30deg); /* Смотрим влево */
+  }
+  25% {
+    transform: translateX(0) rotate(-30deg); /* Центр */
+  }
+  50% {
+    transform: translateX(2px) rotate(-30deg); /* Смотрим вправо */
+  }
+  75% {
+    transform: translateX(0) rotate(-30deg); /* Центр */
+  }
+  100% {
+    transform: translateX(-2px) rotate(-30deg); /* Центр */
+  }
+}
+
+.eye-men-sad-2 {
+  position: absolute;
+  z-index: 11;
+  top: 42px;
+  left: 62px;
+  width: 6px;
+  height: 3px;
+  background-color: white;
+  border-radius: 30px;
+  /* border: 0.1px solid black; */
+  animation: blink 5s infinite
+}
+
+.eye-men-sad-two-2 {
+  position: absolute;
+  z-index: 12;
+  top: 42px;
+  left: 62px;
+  width: 5px;
+  height: 20px;
+  background-color: rgb(1, 228, 197);
+  border-radius: 30px;
+  /* border: 0.1px solid black; */
+  animation: blink2 5s infinite
+}
+
+.tear-left {
+  position: absolute; /* Важно для позиционирования псевдоэлементов */
+  width: 10px;
+  height: 8px;
+  border-radius: 30px;
+  /* background-color: blue; */
+  opacity: 0;
+  background: linear-gradient(to bottom, rgba(0, 89, 255, 0.8), rgba(0, 204, 255, 0.7));
+  
+  filter: blur(0.5px);
+  animation: fall 2s linear infinite;
+}
+
+.tear-left:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.tear-left:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.tear-left:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.tear-left:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(0, 0);  /* Начальное положение */
+    opacity: 0;
+  }
+  25% {
+    transform: translate(-15px, -10px); /* Первая точка дуги */
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-30px, -20px); /* Вершина дуги */
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-45px, -10px); /* Спуск по дуге */
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-55px, 0px);  /* Конечная позиция */
+    opacity: 0;
+  }
+}
+
+.tear-right {
+  position: absolute; /* Важно для позиционирования псевдоэлементов */
+  width: 10px;
+  height: 8px;
+  border-radius: 30px;
+  left: -10px;
+  opacity: 0;
+  background: linear-gradient(to bottom, rgba(0, 89, 255, 0.8), rgba(0, 204, 255, 0.7));
+  
+  filter: blur(0.5px);
+  animation: fall-right 2s linear infinite;
+}
+
+.tear-right:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.tear-right:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.tear-right:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.tear-right:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+@keyframes fall-right {
+  0% {
+    transform: translate(0, 0);  /* Начальное положение */
+    opacity: 0;
+  }
+  25% {
+    transform: translate(15px, -10px); /* Первая точка дуги */
+    opacity: 1;
+  }
+  50% {
+    transform: translate(30px, -20px); /* Вершина дуги */
+    opacity: 1;
+  }
+  75% {
+    transform: translate(45px, -10px); /* Спуск по дуге */
+    opacity: 1;
+  }
+  100% {
+    transform: translate(55px, 0px);  /* Конечная позиция */
+    opacity: 0;
+  }
+}
+
 .mouse-men-two {
   position: absolute;
   z-index: 11;
@@ -283,7 +524,7 @@ body {
 .animations-blocks-one-man img{
   width: 100px;
   height: 140px;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
 }
 
 .animations-blocks-stone img{

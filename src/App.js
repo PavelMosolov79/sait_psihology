@@ -30,6 +30,8 @@ function App() {
   const [lastCompMove, setCompLastMove] = useState("");
   const [defaultImageUser, setDefaultImageUser] = useState(DefaultBoy);
   const [defaultImageComp, setDefaultImageComp] = useState(DefaultBoy);
+  const [defaultEmotionUser, setDefaultEmotionUser] = useState("fine");
+  const [defaultEmotionComp, setDefaultEmotionComp] = useState("fine");
 
   const stashOptions = () => {
     setRound(0);
@@ -178,16 +180,29 @@ function App() {
   const shangeImg = React.useCallback(() => { // Оберните в useCallback
     if (lastMove === "Довериться" && lastCompMove === "Обмануть") {
       setDefaultImageComp(DefaultBoyWin);
+      setDefaultEmotionComp("angry");
       setDefaultImageUser(DefaultBoySad);
+      setDefaultEmotionUser("sad");
+    } else if (lastMove === "Обмануть" && lastCompMove === "Довериться") {
+      setDefaultImageComp(DefaultBoySad);
+      setDefaultEmotionComp("sad");
+      setDefaultImageUser(DefaultBoyWin);
+      setDefaultEmotionUser("angry");
     } else if (lastMove === "Обмануть" && lastCompMove === "Обмануть") {
       setDefaultImageComp(DefaultBoySad);
+      setDefaultEmotionComp("sad");
       setDefaultImageUser(DefaultBoySad);
+      setDefaultEmotionUser("sad");
     } else if (lastMove === "Довериться" && lastCompMove === "Довериться") {
       setDefaultImageComp(DefaultBoyWin);
+      setDefaultEmotionComp("angry");
       setDefaultImageUser(DefaultBoyWin);
-    } else if (lastMove === "Пропустить ход") {
+      setDefaultEmotionUser("angry");
+    } else if (lastMove === "Пропустить ход" || lastCompMove === "Пропустить ход") {
       setDefaultImageComp(DefaultBoy);
+      setDefaultEmotionComp("fine");
       setDefaultImageUser(DefaultBoy);
+      setDefaultEmotionUser("fine");
     }
   }, [lastMove, lastCompMove, setDefaultImageComp, setDefaultImageUser]);
 
@@ -296,15 +311,41 @@ function App() {
                       initial={0}
                       animate={animationStep}
                     >
-                      
-                      <div className='eye-men-one-1'></div>
-                      <div className='eye-men-one-2'></div>
-                      <div className='mouse-men-one'></div>
-                      <img src={defaultImageUser} alt=""/>
+                      <React.Fragment>
+                        {defaultEmotionUser === 'fine' ? 
+                          <React.Fragment>
+                            <div className='eye-men-one-1'></div>
+                            <div className='eye-men-one-2'></div>
+                            <div className='mouse-men-one'></div>
+                          </React.Fragment>
+                        : defaultEmotionUser === 'sad' ?
+                          <React.Fragment>
+                            <div className='eye-men-sad-1'>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                            </div>
+                            <div className='eye-men-sad-2'>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                            </div>
+                            <div className='mouse-men-sad'></div>
+                          </React.Fragment>
+                        : 
+                          <React.Fragment>
+                            <div className='eye-men-one-1'></div>
+                            <div className='eye-men-one-2'></div>
+                            <div className='eye-men-brow-1'></div>
+                            <div className='eye-men-brow-2'></div>
+                            <div className='mouse-men-one'></div>
+                          </React.Fragment>
+                        }
+                        <img src={defaultImageUser} alt=""/> 
+                      </React.Fragment>
                     </motion.div>
-                    {/* <div className='animations-blocks-one-man'>
-                      <img src={DefaultBoy}/>
-                    </div> */}
                     <div className='animations-blocks-stone'>
                       <img src={Stone} alt=""/>
                     </div>
@@ -317,10 +358,40 @@ function App() {
                       initial={0}
                       animate={animationStepTwo}
                     >
-                      <div className='eye-men-two-1'></div>
-                      <div className='eye-men-two-2'></div>
-                      <div className='mouse-men-two'></div>
-                      <img src={defaultImageComp} alt=""/>
+                      <React.Fragment>
+                        {defaultEmotionComp === 'fine' ? 
+                          <React.Fragment>
+                            <div className='eye-men-two-1'></div>
+                            <div className='eye-men-two-2'></div>
+                            <div className='mouse-men-two'></div>
+                          </React.Fragment>
+                        : defaultEmotionComp === 'sad' ?
+                          <React.Fragment>
+                            <div className='eye-men-sad-1'>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                              <div className='tear-left'></div>
+                            </div>
+                            <div className='eye-men-sad-2'>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                              <div className='tear-right'></div>
+                            </div>
+                            <div className='mouse-men-sad'></div>
+                          </React.Fragment>
+                        : 
+                          <React.Fragment>
+                            <div className='eye-men-two-1'></div>
+                            <div className='eye-men-two-2'></div>
+                            <div className='eye-men-brow-1'></div>
+                            <div className='eye-men-brow-2'></div>
+                            <div className='mouse-men-two'></div>
+                          </React.Fragment>
+                        }
+                        <img src={defaultImageComp} alt=""/>
+                      </React.Fragment>
                     </motion.div>
                   </div>
                   <div id="result">Раунд: {round} / 30<br/>Ваши баллы: {scoreUser} | Баллы противника: {scoreComp}</div>
