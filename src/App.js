@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import Stone from "./assets/stone.svg"
 
 function App() {
-  const [firstStart, setFirstStart] = useState(false);
+  const [firstStart, setFirstStart] = useState(true);
 
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
@@ -144,6 +144,9 @@ function App() {
   const handleStartClick = () => {
     if (age && gender) {
       setFirstStart(false);
+      setGameStart(true);
+      setSelectMode(Math.floor(Math.random() * 4) + 1);
+      // setSelectModeName();
     } else {
       alert('Пожалуйста, заполните возраст и пол.');
     }
