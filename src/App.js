@@ -11,7 +11,7 @@ import Stone from "./assets/stone.svg"
 
 function App() {
   const [firstStart, setFirstStart] = useState(true);
-
+  
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
 
@@ -83,6 +83,7 @@ function App() {
     }
   }
 
+  // https://docs.google.com/spreadsheets/d/1rzHDBbwplVG_i2MlyW-kH2rT_x5OGVAyxT-20RCjnIU/edit?usp=sharing
 
   const handleChange = (yourMove) => {
     let computerMove = "";
@@ -91,7 +92,8 @@ function App() {
 
     if (selectMode === 1) {
       // Случайный выбор
-      computerMove = Math.random() < 0.3 ? "Довериться" : Math.random() < 0.3 ? "Пропустить ход" : "Обмануть";
+      let random = Math.floor(Math.random() * 2)
+      computerMove = random === 0 ? "Довериться" : random === 1 ? "Пропустить ход" : "Обмануть";
       chekScored(yourMove, computerMove);
     } else if (selectMode === 2) {
       // Око за око (TFT - Tit for Tat)
@@ -298,7 +300,8 @@ function App() {
             <div className="moves-table-block" style={{display: "flex", gap: "10px"}}>
               <div className="moves-table">
                 <div>
-                  <p>Выберите ваш ход:</p>
+                  {/* <button onClick={() => console.log(Math.floor(Math.random()*))}></button> */}
+                <h1>Дилемма узника</h1>
                   <div className='buttons_chek' style={{display: "flex", alignItems: "center"}}>
                     <button className='button_style' onClick={() => handleChange("Довериться")}>Довериться</button>
                     <button className='button_style' onClick={() => handleChange("Пропустить ход")}>Пропустить ход</button>
