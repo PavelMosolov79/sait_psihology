@@ -12,6 +12,7 @@ function App() {
   
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
+  const [name, setName] = useState('');
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -142,6 +143,7 @@ function App() {
     computerMoveCell.textContent = computerMove;
 
     // Добавляем ячейки в строку
+    
     newRow.appendChild(roundCell);
     newRow.appendChild(yourMoveCell);
     newRow.appendChild(computerMoveCell);
@@ -149,6 +151,7 @@ function App() {
     setGameData(prevData => [...prevData, newGameData]);
 
     // Добавляем строку в таблицу
+    refItem.current.replaceChildren(); 
     refItem.current.appendChild(newRow);
 
     setRound(round + 1);
@@ -162,26 +165,47 @@ function App() {
 
   const generateExcel = () => {
     // Создаем лист данных игры
-    console.log("1")
     const wsGameData = XLSX.utils.json_to_sheet(gameData);
 
     // Создаем лист с ответами на тест
     const testData = [{ ...testAnswers }]; // Преобразуем объект в массив с одним объектом
     const wsTestData = XLSX.utils.json_to_sheet(testData);
-    console.log("2")
 
     // Создаем книгу (workbook) и добавляем листы
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, wsGameData, "Game Data");
     XLSX.utils.book_append_sheet(wb, wsTestData, "Test Answers");
-    console.log("3")
 
     // Генерируем файл XLSX
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-    console.log("4")
 
     // Скачиваем файл
+    saveAs(data, "game_data.xlsx");
+  };
+
+  const generateExcelTwo = () => {
+    // Добавляем демографические данные в gameData
+    const gameDataWithDemographics = gameData.map(item => ({
+      ...item,
+      PlayerName: name,
+      PlayerAge: age,
+      PlayerGender: gender
+    }));
+  
+    // Создаем лист данных игры с демографическими данными
+    const wsGameData = XLSX.utils.json_to_sheet(gameDataWithDemographics);
+  
+    // Остальной код остается без изменений
+    const testData = [{ ...testAnswers }];
+    const wsTestData = XLSX.utils.json_to_sheet(testData);
+  
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, wsGameData, "Game Data");
+    XLSX.utils.book_append_sheet(wb, wsTestData, "Test Answers");
+  
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
     saveAs(data, "game_data.xlsx");
   };
 
@@ -355,6 +379,14 @@ function App() {
             required
             value={age}
             onChange={(e) => setAge(e.target.value)}
+          />
+          <input
+            type="name"
+            id="name"
+            placeholder='Имя'
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <select
             id="gender"
@@ -1087,7 +1119,7 @@ function App() {
         </div>
 
         
-        <button type="button" onClick={generateExcelAndSendEmail}>Закончить</button>
+        <button type="button" onClick={generateExcelTwo}>Закончить</button>
 
         {/* {scoreUser > scoreComp ?
           <div className="game-container" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
