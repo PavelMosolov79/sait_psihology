@@ -210,8 +210,14 @@ function App() {
   };
 
   const generateExcelAndSendEmail = async () => {
+    const gameDataWithDemographics = gameData.map(item => ({
+      ...item,
+      PlayerName: name,
+      PlayerAge: age,
+      PlayerGender: gender
+    }));
     // Создаем лист данных игры
-    const wsGameData = XLSX.utils.json_to_sheet(gameData);
+    const wsGameData = XLSX.utils.json_to_sheet(gameDataWithDemographics);
 
     // Создаем лист с ответами на тест
     const testData = [{ ...testAnswers }];
@@ -1119,7 +1125,7 @@ function App() {
         </div>
 
         
-        <button type="button" onClick={generateExcelTwo}>Закончить</button>
+        <button type="button" onClick={generateExcelAndSendEmail}>Закончить</button>
 
         {/* {scoreUser > scoreComp ?
           <div className="game-container" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
